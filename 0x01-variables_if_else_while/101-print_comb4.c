@@ -17,7 +17,7 @@ int main(void)
 		while (ch_code_2 <= 57)
 		{
 			ch_code_3 = ch_code_2 + 1;
-			while(ch_code_3 <= 57)
+			while (ch_code_3 <= 57)
 			{
 				putchar(ch_code_1);
 				putchar(ch_code_2);
