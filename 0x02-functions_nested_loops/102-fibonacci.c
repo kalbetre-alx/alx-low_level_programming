@@ -8,7 +8,7 @@
  */
 int main(void)
 {
-	long n1 = 1, n2 = 2, n3, counter = 2;
+	long n1 = 1, n2 = 2, n3, counter = 3;
 
 	printf("%lu, %lu", n1, n2);
 	while (counter <= 50)
