@@ -12,10 +12,14 @@
 
 void print_remaining_days(int month, int day, int year)
 {
-	short check_1 = year % 4 == 0  && year % 100 != 0;
+	short check_1 = year % 4 == 0 && year % 100 != 0;
 	short check_2 = year % 100 == 0 && year % 400 == 0;
 
-	if (check_1 || check_2)
+	if (year <= 1582)
+	{
+		printf("Invalid date: %02d/%02d/%04d\n", month, day, year);
+	}
+	else if (check_1 || check_2)
 	{
 		if (month >= 2 && day >= 60)
 		{
@@ -29,11 +33,12 @@ void print_remaining_days(int month, int day, int year)
 	{
 		if (month == 2 && day == 60)
 		{
-			/* printf("Invalid date: %02d/%02d/%04d\n", month, day - 31, year); */
-			day--;
+			printf("Invalid date: %02d/%02d/%04d\n", month, day - 31, year);
 		}
-		
-		printf("Day of the year: %d\n", day);
-		printf("Remaining days: %d\n", 365 - day);
+		else
+		{
+			printf("Day of the year: %d\n", day);
+			printf("Remaining days: %d\n", 365 - day);
+		}
 	}
 }
