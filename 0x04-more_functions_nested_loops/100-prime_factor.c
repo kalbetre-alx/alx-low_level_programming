@@ -13,14 +13,9 @@ int main(void)
 	while (n >= factor * factor)
 	{
 		if (n % factor == 0)
-		{
 			n = n / factor;
-			printf("%lu ", factor);
-		}
 		else
-		{
 			factor++;
-		}
 	}
 	printf("%lu\n", n);
 	return (0);
