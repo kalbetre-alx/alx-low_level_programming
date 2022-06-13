@@ -9,9 +9,9 @@
 
 int _atoi(char *s)
 {
-	int offset = 0, tens = 10, number = 0;
-	char sign = '+';
-	short is_number_set = 0, is_sign_valid = 1;
+	int offset = 0, tens = 10;
+	unsigned int number = 0;
+	short sign = 1, is_number_set = 0, is_sign_valid = 1;
 
 	while (*(s + offset) != '\0')
 	{
@@ -19,11 +19,9 @@ int _atoi(char *s)
 		{
 			while (*(s + offset) == '-' || *(s + offset) == '+')
 			{
-				sign = *(s + offset);
+				sign = *(s + offset) == '-' ? sign * -1 : sign;
 				offset++;
 			}
-			if (!(*(s + offset) >= 48 && *(s + offset) <= 57))
-				is_sign_valid = 0;
 		}
 		if (*(s + offset) >= 48 && *(s + offset) <= 57)
 		{
@@ -32,13 +30,15 @@ int _atoi(char *s)
 		}
 		else if (is_number_set)
 		{
+			if (*(s + offset) != ' ')
+				is_sign_valid = 0;
 			break;
 		}
 		offset++;
 	}
 
-	sign = is_sign_valid ? sign : '+';
-	number = number * (sign == '+' ? 1 : -1);
+	sign = is_sign_valid ? sign : 1;
+	number = number * sign;
 
 	return (number);
 }
