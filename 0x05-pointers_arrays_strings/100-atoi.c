@@ -15,7 +15,7 @@ int _atoi(char *s)
 
 	while (*(s + offset) != '\0')
 	{
-		if (is_sign_valid && *(s + offset) == '-' || *(s + offset) == '+')
+		if (is_sign_valid && (*(s + offset) == '-' || *(s + offset) == '+'))
 		{
 			while (*(s + offset) == '-' || *(s + offset) == '+')
 			{
