@@ -1,9 +1,9 @@
-/*
+/**
  * _strcmp - compares two strings
  * @s1: first string
  * @s2: second string
  *
- * Returns: 1 if s1 is greater, -1 if lessert or 0
+ * Return: positive if s1 is greater, negative if lesser or 0
  */
 
 int _strcmp(char *s1, char *s2)
