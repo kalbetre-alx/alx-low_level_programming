@@ -10,7 +10,7 @@
 void print_number(int n)
 {
 	unsigned int pos_n;
-	short digit, tens = 1, count, i = 0;
+	short digit, tens = 1;
 
 	if (n == 0)
 	{
