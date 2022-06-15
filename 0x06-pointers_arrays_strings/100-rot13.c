@@ -16,19 +16,17 @@ char *rot13(char *str)
 		is_lwr_caps = *(str + i) >= 'a' && *(str + i) <= 'z';
 		is_upr_caps = *(str + i) >= 'A' && *(str + i) <= 'Z';
 
-		if (is_lwr_caps || is_upr_caps)
+		j = 0;
+		while (j < count && (is_lwr_caps || is_upr_caps))
 		{
-			j = 0;
-			while (j < count)
+			if (*(str + i) == *(keys + j))
 			{
-				if (*(str + i) == *(keys + j))
-				{
-					*(str + i) = *(encs + j);
-					break;
-				}
-				j++;
+				*(str + i) = *(encs + j);
+				break;
 			}
+			j++;
 		}
+
 		i++;
 	}
 	return (str);
