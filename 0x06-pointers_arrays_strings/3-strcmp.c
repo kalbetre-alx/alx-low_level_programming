@@ -12,15 +12,13 @@ int _strcmp(char *s1, char *s2)
 
 	while (*(s1 + index) != '\0' && *(s2 + index) != '\0')
 	{
-		if (*(s1 + index) > *(s2 + index))
-			return (1);
-		else if (*(s1 + index) < *(s2 + index))
-			return (-1);
+		if (*(s1 + index) != *(s2 + index))
+			return (*(s1 + index) - *(s2 + index));
 		index++;
 	}
 
 	if (*(s1 + index) != '\0' || *(s2 + index) != '\0')
-		return (*(s1 + index) != '\0' ? 1 : -1);
+		return (*(s1 + index) != '\0' ? *(s1 + index) : *(s2 + index) * -1);
 
 	return (0);
 }
