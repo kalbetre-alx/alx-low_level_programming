@@ -9,29 +9,21 @@
 
 void print_number(int n)
 {
-	unsigned int pos_n;
-	short digit, tens = 1;
+	unsigned int pos_n, digit;
+	double factor = 1;
 
-	if (n == 0)
+	pos_n = n < 0 ? -1 * n : n;
+	if (n < 0)
+		_putchar('-');
+
+	while ((pos_n / factor >= 10))
+		tens *= 10;
+
+	while (factor >= 1)
 	{
-		_putchar('0');
-	}
-	else
-	{
-		pos_n = n < 0 ? -1 * n : n;
-		if (n < 0)
-			_putchar('-');
-
-		while ((pos_n / tens > 0))
-			tens *= 10;
-		tens /= 10;
-
-		while (tens >= 1)
-		{
-			digit = pos_n / tens;
-			pos_n = pos_n - digit * tens;
-			tens /= 10;
-			_putchar(digit + '0');
-		}
+		digit = pos_n / factor;
+		pos_n = pos_n - digit * factor;
+		factor /= 10;
+		_putchar(digit + '0');
 	}
 }
