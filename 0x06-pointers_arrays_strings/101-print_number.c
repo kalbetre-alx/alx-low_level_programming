@@ -17,7 +17,7 @@ void print_number(int n)
 		_putchar('-');
 
 	while ((pos_n / factor >= 10))
-		tens *= 10;
+		factor *= 10;
 
 	while (factor >= 1)
 	{
