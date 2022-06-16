@@ -34,7 +34,7 @@ void print_buffer(char *b, int size)
 				printf(" ");
 		}
 
-		for (i = 0; i < j; j++)
+		for (i = 0; i < j; i++)
 		{
 			ch = *(b + l * 10 + i);
 			if (ch < 32 || ch > 132)
