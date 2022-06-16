@@ -10,7 +10,7 @@
 
 void print_buffer(char *b, int size)
 {
-	int i = 0, j, l = 0, lines, byte_1, byte_2, ch;
+	int i, j, l = 0, lines, ch;
 
 	if (size <= 0)
 	{
@@ -22,24 +22,24 @@ void print_buffer(char *b, int size)
 	while (l < lines)
 	{
 		printf("%08x: ", l * 10);
+		j = size - l * 10 < 10 ? size - l * 10 : 10;
 
-		for (j = 0; j < 5; j++)
+		for (i = 0; i < 10; i++)
 		{
-			byte_1 = i < size ? b[i++] : 0;
-			byte_2 = i < size ? b[i++] : 0;
-
-			if (byte_1 == 0 && byte_2 == 0 && i >= size)
-				printf("     ");
+			if (i < j)
+				printf("%02x%02x", *(b + l * 10 + i));
 			else
-				printf("%02x%02x ", byte_1, byte_2);
+				printf("  ");
+			if (i % 2)
+				printf(" ");
 		}
 
-		for (j = 0; j < 10 && l * 10 + j < size; j++)
+		for (i = 0; i < j; j++)
 		{
-			ch = *(b + l * 10 + j);
+			ch = *(b + l * 10 + i);
 			if (ch < 32 || ch > 132)
 				ch = '.';
-			printf("%c", ch);
+			putchar(ch);
 		}
 
 		putchar('\n');
