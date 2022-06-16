@@ -33,10 +33,14 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 		carry = (right + left + carry) / 10;
 		*(r + i++) = sum + '0';
 	}
-	if (carry > 0 && i + 1 < size_r)
-		*(r + i++) = carry + '0';
-	else
-		return (0);
+
+	if (carry)
+	{
+		if (i + 1 < size_r)
+			*(r + i++) = carry + '0';
+		else
+			return (0);
+	}
 
 	*(r + i) = '\0';
 	for (j = 0; j < i / 2; j++)
