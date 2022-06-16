@@ -13,6 +13,12 @@ void print_buffer(char *b, int size)
 	int i = 0, j, l = 0, lines, byte_1, byte_2;
 	char ch;
 
+	if (size <= 0)
+	{
+		printf("\n");
+		return;
+	}
+
 	lines = size / 10 + (size % 10 > 0 ? 1 : 0);
 	while (l < lines)
 	{
