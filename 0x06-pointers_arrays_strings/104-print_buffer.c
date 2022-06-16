@@ -10,8 +10,7 @@
 
 void print_buffer(char *b, int size)
 {
-	int i = 0, j, l = 0, lines, byte_1, byte_2;
-	char ch;
+	int i = 0, j, l = 0, lines, byte_1, byte_2, ch;
 
 	if (size <= 0)
 	{
@@ -38,10 +37,9 @@ void print_buffer(char *b, int size)
 		for (j = 0; j < 10 && l * 10 + j < size; j++)
 		{
 			ch = *(b + l * 10 + j);
-			if (ch >= 32)
-				putchar(ch);
-			else
-				putchar('.');
+			if (ch < 32 || ch > 132)
+				ch = '.';
+			printf("%c", ch);
 		}
 
 		putchar('\n');
