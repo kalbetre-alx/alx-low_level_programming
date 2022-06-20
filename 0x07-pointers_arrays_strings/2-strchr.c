@@ -23,7 +23,7 @@ char *_strchr(char *s, char c)
 		i++;
 	}
 
-	if (is_found)
+	if (is_foundi || c == '\0')
 		return (s + i);
 	else
 		return (NULL);
