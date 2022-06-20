@@ -1,5 +1,3 @@
-#include <stddef.h>
-
 /**
  * _strspn - gets the length of a prefix substring
  * @s: the pointer to the string
@@ -11,7 +9,6 @@
 unsigned int _strspn(char *s, char *accept)
 {
 	unsigned int i = 0, j, count = 0, is_prefix = 0;
-	char ch;
 
 	while (*(s + i) != '\0')
 	{
