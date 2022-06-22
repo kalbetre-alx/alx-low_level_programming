@@ -27,7 +27,7 @@ char *mov_forward(char *s, char *match, char *c)
 		match = s;
 		return (mov_forward(s + 1, match, c));
 	}
-	else if (*s == '\0')
+	else if (*s == '\0' || *(c + 1) == '*')
 	{
 		if (*match == *c)
 			return (match);
