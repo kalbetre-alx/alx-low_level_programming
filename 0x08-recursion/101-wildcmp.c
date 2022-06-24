@@ -1,77 +1,42 @@
 /**
- * skip_wild - skips to the next wild card
- * @s: the string
- *
- * Return: the next wild card
+ * substr_match - check if a substring after wildcard matches s1
+ * @s1: one string
+ * @s2: one string
+ * @after_wldcd: placeholder for position right after wildcard
+ * Return: 1 if matched, 0 if not
  */
-char *skip_wild(char *s)
+
+int substr_match(char *s1, char *s2, char *after_wldcd)
 {
-	if (*s == '\0' || *s != '*')
-		return (s);
+	if (*s1 == '\0' && *s2 == '\0')
+		return (1);
+	if (*s1 == '\0' && *s2 == '*')
+		return (substr_match(s1, s2 + 1, s2 + 1));
+	if (*s1 == '\0' && *s2 != '\0')
+		return (0);
+	if (*s2 == '*')
+		return (substr_match(s1, s2 + 1, s2 + 1));
+	if (*s1 == *s2)
+		return (substr_match(s1 + 1, s2 + 1, after_wldcd));
 	else
-		return (skip_wild(s + 1));
+		return (substr_match(s1 + 1, after_wldcd, after_wldcd));
 }
 
 /**
- * mov_forward - moves a pointer to the next matching char
- * @s: the string
- * @match: the matching pointer
- * @c: the char
- *
- * Return: pointer to the char
+ * wildcmp - compare if string with wildcard mattches
+ * @s1: one string
+ * @s2: one string
+ * Return: 1 if matched, 0 if not
  */
-char *mov_forward(char *s, char *match, char *c)
-{
-	if (*s == *c)
-	{
-		match = s;
-		return (mov_forward(s + 1, match, c));
-	}
-	else if (*s == '\0')
-	{
-		if (*match == *c)
-			return (match);
-		else
-			return (s);
-	}
-	return (mov_forward(s + 1, match, c));
-}
 
-/**
- * wildcmp - compares strings with wild card
- * @s1: first string
- * @s2: second string
- *
- * Return: 1 if s1 and s2 are identical or 0
- */
 int wildcmp(char *s1, char *s2)
 {
-	if (*s2 == '*')
-	{
-		s2 = skip_wild(s2);
-		if (*s2 == '\0')
-			return (1);
-
-		s1 = mov_forward(s1, s1, s2);
-		return (wildcmp(s1, s2));
-	}
-
-	if (*s1 != *s2)
-	{
-		if (*s2 == '*')
-		{
-			s2 = skip_wild(s2);
-			s1 = mov_forward(s1, s1, s2);
-			return (wildcmp(s1, s2));
-		}
-		return (0);
-	}
-	else if (*s1 == '\0' && *s2 == '\0')
-	{
+	if (*s1 == '\0' && *s2 == '\0')
 		return (1);
-	}
-	else
-	{
+	if (*s1 == *s2)
 		return (wildcmp(s1 + 1, s2 + 1));
-	}
+	else if (*s2 == '*')
+		return (substr_match(s1, (s2 + 1), (s2 + 1)));
+	else
+		return (0);
 }
