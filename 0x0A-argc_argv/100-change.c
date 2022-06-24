@@ -29,13 +29,13 @@ int main(int argc, char **argv)
 		{
 			for (i = 0; i < 4; i++)
 			{
-				while (num >= coins[i])
+				while (cents >= coins[i])
 				{
-					num -= coins[i];
+					cents -= coins[i];
 					count++;
 				}
 			}
-			printf("%d\n", num + count);
+			printf("%d\n", cents + count);
 		}
 	}
 	return (0);
