@@ -41,6 +41,7 @@ int **alloc_grid(int width, int height)
 			free(ary_2D[h]);
 			h--;
 		}
+		free(ary_2D);
 		return (NULL);
 	}
 
