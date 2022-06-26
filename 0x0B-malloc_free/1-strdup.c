@@ -17,12 +17,12 @@ char *_strdup(char *str)
 	while (str[str_len] != '\0')
 		str_len++;
 
-	str_dup = (char *)malloc(sizeof(char) * str_len);
+	str_dup = (char *)malloc(sizeof(char) * (str_len + 1));
 
 	if (str_dup == NULL)
 		return (NULL);
 
-	while (i < str_len)
+	while (i <= str_len)
 	{
 		str_dup[i] = str[i];
 		i++;
