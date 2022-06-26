@@ -21,14 +21,14 @@ int **alloc_grid(int width, int height)
 
 	while (h < height)
 	{
-		ary_2D[height] = (int *)malloc(sizeof(int) * width);
-		if (ary_2D[height] == NULL)
+		ary_2D[h] = (int *)malloc(sizeof(int) * width);
+		if (ary_2D[h] == NULL)
 			break;
 
 		i = 0;
 		while (i < width)
 		{
-			ary_2D[height][i] = 0;
+			ary_2D[h][i] = 0;
 			i++;
 		}
 		h++;
