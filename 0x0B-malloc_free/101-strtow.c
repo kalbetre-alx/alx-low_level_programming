@@ -38,7 +38,7 @@ char *next_word(char *str, int *word_size)
  */
 int word_count(char *str)
 {
-	int count = 0, i = 0, word_size = 0;
+	int count = 0, word_size = 0;
 	char *word = next_word(str, &word_size);
 
 	while (word != NULL)
@@ -62,10 +62,13 @@ char **strtow(char *str)
 	char **words;
 	char *word;
 
-	if (str == NULL || str == "")
+	if (str == NULL)
 		return (NULL);
 
 	num_words = word_count(str);
+	if (num_words == 0)
+		return (NULL);
+
 	words = malloc(sizeof(char *) * (num_words + 1));
 	if (words == NULL)
 		return (NULL);
