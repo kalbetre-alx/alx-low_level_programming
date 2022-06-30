@@ -28,9 +28,11 @@ int isValidNumber(char *num)
  */
 void _puts(char *str)
 {
-	if (isValidNumber(str) && *str == '0')
-		str++;
-
+	if (isValidNumber(str))
+	{
+		while(*str == '0')
+			str++;
+	}
 	while (*str)
 		_putchar(*str++);
 	_putchar('\n');
