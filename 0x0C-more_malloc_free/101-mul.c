@@ -103,6 +103,7 @@ int main(int argc, char **argv)
 	{
 		result = mul(argv[1], argv[2]);
 		_puts(result);
+		free(result);
 	}
 	return (0);
 
