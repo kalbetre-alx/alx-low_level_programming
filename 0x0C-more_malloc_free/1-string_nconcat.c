@@ -6,9 +6,9 @@
  *
  * Return: length of the string or 0 if NULL
  */
-unsigned int _strlen(char *str)
+int _strlen(char *str)
 {
-	unsigned int len = 0;
+	int len = 0;
 
 	if (str == NULL)
 		return (0);
@@ -30,7 +30,10 @@ unsigned int _strlen(char *str)
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
 	unsigned int s1_len, s2_len, i = 0;
-	char *combo, *s;
+	char *combo;
+
+	if (n < 0)
+		return (NULL);
 
 	s1_len = _strlen(s1);
 	s2_len = _strlen(s2);
