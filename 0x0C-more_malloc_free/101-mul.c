@@ -30,7 +30,7 @@ void _puts(char *str)
 {
 	if (isValidNumber(str))
 	{
-		while(*str == '0')
+		while (*str == '0')
 			str++;
 	}
 	while (*str)
