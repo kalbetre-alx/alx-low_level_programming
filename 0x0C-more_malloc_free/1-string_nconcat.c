@@ -13,9 +13,9 @@ unsigned int _strlen(char *str)
 	if (str == NULL)
 		return (0);
 
-	while(*(str + len))
+	while (*(str + len))
 		len++;
-	
+
 	return (len);
 }
 
@@ -30,29 +30,29 @@ unsigned int _strlen(char *str)
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
 	unsigned int s1_len, s2_len, i = 0;
-	char *combo;
+	char *combo, *s;
 
 	s1_len = _strlen(s1);
 	s2_len = _strlen(s2);
-	n = n >= s2_len ? s2_len : n;
+	s2_len = s2_len > n ? n : s2_len;
 
-	combo = malloc(sizeof(char) * (s1_len + n + 1));
+	s = combo = malloc(sizeof(char) * (s1_len + s2_len + 1));
 	if (combo == NULL)
 		return (NULL);
 
-	while (*(s1 + i) != '\0')
+	while (*(s1 + i))
 	{
 		*(combo + i) = *(s1 + i);
 		i++;
 	}
 
 	i = 0;
-	while (i < n)
+	while (i < s2_len)
 	{
 		*(combo + s1_len + i) = *(s2 + i);
 		i++;
 	}
 
-	*(combo + s1_len + n) = '\0';
-	return (combo);
+	*(combo + s1_len + s2_len) = '\0';
+	return (s);
 }
