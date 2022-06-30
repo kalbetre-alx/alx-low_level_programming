@@ -1,7 +1,23 @@
-#include "holberton.h"
-#include <stdio.h>
+#include "main.h"
 #include <stdlib.h>
 #include <string.h>
+
+/**
+ * _printf - prints a string followed by a new line
+ * @str: the string
+ *
+ * Return: Nothing
+ */
+void _printf(char *str)
+{
+	if (isValidNumber(str))
+	{
+		while (*str == '0')
+			str++;
+	}
+	while (*str)
+		_putchar(*str++);
+}
 
 /**
  * _isdigit - checks if character is digit
@@ -45,7 +61,7 @@ char *big_multiply(char *s1, char *s2)
 	l2 = _strlen(s2);
 	r = malloc(a = x = l1 + l2);
 	if (!r)
-		printf("Error\n"), exit(98);
+		_printf("Error\n"), exit(98);
 	while (a--)
 		r[a] = 0;
 
@@ -54,7 +70,7 @@ char *big_multiply(char *s1, char *s2)
 		if (!_isdigit(s1[l1]))
 		{
 			free(r);
-			printf("Error\n"), exit(98);
+			_printf("Error\n"), exit(98);
 		}
 		a = s1[l1] - '0';
 		c = 0;
@@ -64,7 +80,7 @@ char *big_multiply(char *s1, char *s2)
 			if (!_isdigit(s2[l2]))
 			{
 				free(r);
-				printf("Error\n"), exit(98);
+				_printf("Error\n"), exit(98);
 			}
 			b = s2[l2] - '0';
 
@@ -93,7 +109,7 @@ int main(int argc, char **argv)
 	int a, c, x;
 
 	if (argc != 3)
-		printf("Error\n"), exit(98);
+		_printf("Error\n"), exit(98);
 
 	x = _strlen(argv[1]) + _strlen(argv[2]);
 	r = big_multiply(argv[1], argv[2]);
