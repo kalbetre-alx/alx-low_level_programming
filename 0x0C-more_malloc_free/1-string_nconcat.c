@@ -11,7 +11,7 @@
  */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	int s1_len, s2_len, i = 0;
+	unsigned int s1_len, s2_len, i = 0;
 	char *combo;
 
 	s1_len = s1 == NULL ? 0 : strlen(s1);
