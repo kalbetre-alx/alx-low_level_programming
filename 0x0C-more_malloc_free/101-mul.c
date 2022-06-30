@@ -94,7 +94,7 @@ int main(int argc, char **argv)
 {
 	char *result;
 
-	if (argc < 3 || !isValidNumber(argv[1]) || !isValidNumber(argv[2]))
+	if (argc != 3 || !isValidNumber(argv[1]) || !isValidNumber(argv[2]))
 	{
 		_puts("Error");
 		exit(98);
