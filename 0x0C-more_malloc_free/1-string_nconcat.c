@@ -16,7 +16,7 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 
 	s1_len = s1 == NULL ? 0 : strlen(s1);
 	s2_len = s2 == NULL ? 0 : strlen(s2);
-	n = n > s2_len ? s2_len : n;
+	n = n >= s2_len ? s2_len : n;
 
 	combo = malloc(sizeof(char) * s1_len + n + 1);
 	if (combo == NULL)
