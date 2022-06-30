@@ -10,9 +10,6 @@ unsigned int _strlen(char *str)
 {
 	unsigned int len = 0;
 
-	if (str == NULL)
-		return (0);
-
 	while (*(str + len))
 		len++;
 
@@ -30,11 +27,12 @@ unsigned int _strlen(char *str)
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
 	unsigned int s1_len, s2_len, i = 0;
-	int len = n;
 	char *combo;
 
-	if (len < 0)
-		return (NULL);
+	if (s1 == NULL)
+		s1 = "";
+	if (s2 == NULL)
+		s2 = "";
 
 	s1_len = _strlen(s1);
 	s2_len = _strlen(s2);
