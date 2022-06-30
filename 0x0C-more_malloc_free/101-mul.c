@@ -105,7 +105,7 @@ int main(int argc, char **argv)
 			_puts("Error");
 			exit(98);
 		}
-		else 
+		else
 		{
 			_puts(result);
 			free(result);
