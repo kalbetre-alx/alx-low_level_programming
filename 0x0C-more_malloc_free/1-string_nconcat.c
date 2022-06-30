@@ -6,9 +6,9 @@
  *
  * Return: length of the string or 0 if NULL
  */
-int _strlen(char *str)
+unsigned int _strlen(char *str)
 {
-	int len = 0;
+	unsigned int len = 0;
 
 	if (str == NULL)
 		return (0);
@@ -30,16 +30,17 @@ int _strlen(char *str)
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
 	unsigned int s1_len, s2_len, i = 0;
+	int len = n;
 	char *combo;
 
-	if (n < 0)
+	if (len < 0)
 		return (NULL);
 
 	s1_len = _strlen(s1);
 	s2_len = _strlen(s2);
 	s2_len = s2_len > n ? n : s2_len;
 
-	s = combo = malloc(sizeof(char) * (s1_len + s2_len + 1));
+	combo = malloc(sizeof(char) * (s1_len + s2_len + 1));
 	if (combo == NULL)
 		return (NULL);
 
@@ -57,5 +58,5 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	}
 
 	*(combo + s1_len + s2_len) = '\0';
-	return (s);
+	return (combo);
 }
