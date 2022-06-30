@@ -11,9 +11,6 @@
  */
 int isValidNumber(char *num)
 {
-	if (*num == '-')
-		num++;
-
 	while (*num)
 	{
 		if (!isdigit(*num))
@@ -31,16 +28,8 @@ int isValidNumber(char *num)
  */
 void _puts(char *str)
 {
-	if (isValidNumber(str))
-	{
-		if (*str == '-')
-		{
-			_putchar('-');
-			str++;
-		}
-		if (*str == '0')
-			str++;
-	}
+	if (isValidNumber(str) && *str == '0')
+		str++;
 
 	while (*str)
 		_putchar(*str++);
@@ -58,47 +47,37 @@ char *mul(char *n1, char *n2)
 {
 	char *product;
 	char d;
-	int n1_len, n2_len, pr_len, carry, sum, j;
-	int n1_sign_offset, n2_sign_offset, sign_offset;
+	int n1_len, n2_len, pr_len, carry, sum, j = 0;
 
-	n1_sign_offset = *n1 == '-' ? 1 : 0;
-	n2_sign_offset = *n2 == '-' ? 1 : 0;
-
-	n1_len = strlen(n1) - n1_sign_offset;
-	n2_len = strlen(n2) - n2_sign_offset;
-	sign_offset = (*n1 == '-') ^ (*n2 == '-');
-	pr_len = n1_len + n2_len + sign_offset;
-	product = malloc(sizeof(char) * pr_len);
+	n1_len = strlen(n1);
+	n2_len = strlen(n2);
+	pr_len = n1_len + n2_len;
+	product = malloc(pr_len + 1);
 	if (product == NULL)
 		return (NULL);
-
-	while (pr_len)
+	while (j < pr_len)
 	{
-		*(product + pr_len - 1) = '0';
-		pr_len--;
+		*(product + j) = '0';
+		j++;
 	}
-
 	n2_len--;
 	n1_len--;
-	while (n2_len - n2_sign_offset >= 0)
+	while (n2_len >= 0)
 	{
 		carry = 0;
 		j = n1_len;
 		while (j >= 0)
 		{
-			d = product[j + n2_len + sign_offset + 1] - 48;
-			sum = carry + d + (n1[j + n1_sign_offset] - 48) * (n2[n2_len] - 48);
+			d = product[j + n2_len + 1] - 48;
+			sum = carry + d + (n1[j] - 48) * (n2[n2_len] - 48);
 			carry = sum / 10;
-			product[j + n2_len + sign_offset + 1] = sum % 10 + '0';
+			product[j + n2_len + 1] = sum % 10 + '0';
 			j--;
 		}
-		product[n2_len + sign_offset] = carry + '0';
+		product[n2_len] = carry + '0';
 		n2_len--;
 	}
-
-	if (sign_offset)
-		product[0] = '-';
-
+	product[pr_len] = '\0';
 	return (product);
 }
 
@@ -121,9 +100,16 @@ int main(int argc, char **argv)
 	else
 	{
 		result = mul(argv[1], argv[2]);
-		_puts(result);
-		free(result);
+		if (result == NULL)
+		{
+			_puts("Error");
+			exit(98);
+		}
+		else 
+		{
+			_puts(result);
+			free(result);
+		}
 	}
 	return (0);
-
 }
