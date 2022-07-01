@@ -10,11 +10,6 @@
  */
 void _printf(char *str)
 {
-	if (isValidNumber(str))
-	{
-		while (*str == '0')
-			str++;
-	}
 	while (*str)
 		_putchar(*str++);
 }
