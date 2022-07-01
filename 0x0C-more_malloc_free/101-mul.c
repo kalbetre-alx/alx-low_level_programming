@@ -1,126 +1,118 @@
-#include "main.h"
 #include <stdlib.h>
-#include <stdio.h>
+#include <string.h>
 #include <ctype.h>
+#include "main.h"
 
 /**
- * _is_zero - determines if any number is zero
- * @argv: argument vector.
+ * isValidNumber - checks if a string is a valid number
+ * @num: the given number
  *
- * Return: no return.
+ * Return: 1 if it is valid or 0
  */
-void _is_zero(char *argv[])
+int isValidNumber(char *num)
 {
-	int i, isn1 = 1, isn2 = 1;
-
-	for (i = 0; argv[1][i]; i++)
-		if (argv[1][i] != '0')
-		{
-			isn1 = 0;
-			break;
-		}
-
-	for (i = 0; argv[2][i]; i++)
-		if (argv[2][i] != '0')
-		{
-			isn2 = 0;
-			break;
-		}
-
-	if (isn1 == 1 || isn2 == 1)
+	while (*num)
 	{
-		printf("0\n");
-		exit(0);
+		if (*num < '0' || *num > '9')
+			return (0);
+		num++;
 	}
+	return (1);
 }
 
 /**
- * _initialize_array - set memery to zero in a new array
- * @ar: char array.
- * @lar: length of the char array.
+ * _puts - prints a string followed by a new line
+ * @str: the string
  *
- * Return: pointer of a char array.
+ * Return: Nothing
  */
-char *_initialize_array(char *ar, int lar)
+void _puts(char *str)
 {
-	int i = 0;
-
-	for (i = 0; i < lar; i++)
-		ar[i] = '0';
-	ar[lar] = '\0';
-	return (ar);
-}
-
-/**
- * _checknum - determines length of the number
- * and checks if number is in base 10.
- * @argv: arguments vector.
- * @n: row of the array.
- *
- * Return: length of the number.
- */
-int _checknum(char *argv[], int n)
-{
-	int ln;
-
-	for (ln = 0; argv[n][ln]; ln++)
-		if (!isdigit(argv[n][ln]))
-		{
-			printf("Error\n");
-			exit(98);
-		}
-
-	return (ln);
-}
-
-/**
- * main - Entry point.
- * program that multiplies two positive numbers.
- * @argc: number of arguments.
- * @argv: arguments vector.
- *
- * Return: 0 - success.
- */
-int main(int argc, char *argv[])
-{
-	int ln1, ln2, lnout, add, addl, i, j, k, ca;
-	char *nout;
-
-	if (argc != 3)
-		printf("Error\n"), exit(98);
-	ln1 = _checknum(argv, 1), ln2 = _checknum(argv, 2);
-	_is_zero(argv), lnout = ln1 + ln2, nout = malloc(lnout + 1);
-	if (nout == NULL)
-		printf("Error\n"), exit(98);
-	nout = _initialize_array(nout, lnout);
-	k = lnout - 1, i = ln1 - 1, j = ln2 - 1, ca = addl = 0;
-	for (; k >= 0; k--, i--)
+	if (isValidNumber(str))
 	{
-		if (i < 0)
-		{
-			if (addl > 0)
-			{
-				add = (nout[k] - '0') + addl;
-				if (add > 9)
-					nout[k - 1] = (add / 10) + '0';
-				nout[k] = (add % 10) + '0';
-			}
-			i = ln1 - 1, j--, addl = 0, ca++, k = lnout - (1 + ca);
-		}
-		if (j < 0)
-		{
-			if (nout[0] != '0')
-				break;
-			lnout--;
-			free(nout), nout = malloc(lnout + 1), nout = _initialize_array(nout, lnout);
-			k = lnout - 1, i = ln1 - 1, j = ln2 - 1, ca = addl = 0;
-		}
-		if (j >= 0)
-		{
-			add = ((argv[1][i] - '0') * (argv[2][j] - '0')) + (nout[k] - '0') + addl;
-			addl = add / 10, nout[k] = (add % 10) + '0';
-		}
+		while (*str == '0')
+			str++;
 	}
-	printf("%s\n", nout);
-	return (0);
+	while (*str)
+		_putchar(*str++);
+	_putchar('\n');
+}
+
+/**
+ * mul - multiplies two large numbers
+ * @s1: first number
+ * @s2: second number
+ *
+ * Return: s1 times s2
+ */
+char *mul(char *n1, char *n2)                                                                             
+{                                                                                                         
+        char *product;                                                                                    
+        char d;                                                                                           
+        int n1_len, n2_len, pr_len, carry, sum, j = 0;                                                    
+                                                                                                          
+        n1_len = strlen(n1);                                                                              
+        n2_len = strlen(n2);                                                                              
+        pr_len = n1_len + n2_len;                                                                         
+        product = malloc(pr_len + 1);                                                                     
+        if (product == NULL)                                                                              
+                return (NULL);                                                                            
+        while (j < pr_len)                                                                                
+        {                                                                                                 
+                *(product + j) = '0';                                                                     
+                j++;                                                                                      
+        }                                                                                                 
+        n2_len--;                                                                                         
+        n1_len--;                                                                                         
+        while (n2_len >= 0)                                                                               
+        {                                                                                                 
+                carry = 0;                                                                                
+                j = n1_len;                                                                               
+                while (j >= 0)                                                                            
+                {                                                                                         
+                        d = product[j + n2_len + 1] - 48;                                                 
+                        sum = carry + d + (n1[j] - 48) * (n2[n2_len] - 48);                               
+                        carry = sum / 10;                                                                 
+                        product[j + n2_len + 1] = sum % 10 + '0';                                         
+                        j--;                                                                              
+                }                                                                                         
+                product[n2_len] = carry + '0';                                                            
+                n2_len--;                                                                                 
+        }                                                                                                 
+        product[pr_len] = '\0';                                                                           
+        return (product);                                                                                 
+}
+
+/**
+ * main - multiplies two numbers
+ * @argc: number of arguments passed
+ * @argv: array of values passed to the the program
+ *
+ * Return: the multiplication of the numbers
+ */
+
+int main(int argc, char **argv)
+{
+        char *result;
+
+        if (argc != 3 || !isValidNumber(argv[1]) || !isValidNumber(argv[2]))
+        {
+                _puts("Error");
+                exit(98);
+        }
+        else
+        {
+                result = mul(argv[1], argv[2]);
+                if (result == NULL)
+                {
+                        _puts("Error");
+                        exit(98);
+                }
+                else
+                {
+                        _puts(result);
+                        free(result);
+                }
+        }
+        return (0);
 }
