@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 
 	fun = get_op_func(argv[2]);
 
-	if (fun == NULL)
+	if (fun == NULL || (argv[2][1] != '\0'))
 	{
 		puts("Error");
 		exit(99);
