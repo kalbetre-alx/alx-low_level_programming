@@ -10,7 +10,7 @@
  */
 void print_opcodes(char *main_fun, int n_bytes)
 {
-	int i;
+	int i = 0;
 
 	while (i < n_bytes)
 	{
