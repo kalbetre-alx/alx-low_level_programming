@@ -41,4 +41,3 @@ int main(int argc, char **argv)
 	printf("%d\n", fun(a, b));
 	return (0);
 }
-
