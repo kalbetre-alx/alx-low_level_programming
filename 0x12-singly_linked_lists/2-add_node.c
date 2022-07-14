@@ -23,10 +23,18 @@ list_t *add_node(list_t **head, const char *str)
 	{
 		node->len = strlen(str);
 		node->str = malloc(sizeof(char) * node->len);
+		if (node->str == NULL)
+			return (NULL);
 		strcpy(node->str, str);
 	}
+
+	if (head == NULL)
+	{
+		node->next = NULL;
+		return (node);
+	}
+
 	node->next = *head;
 	*head = node;
-
 	return (*head);
 }
