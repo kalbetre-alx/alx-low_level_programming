@@ -7,13 +7,16 @@
  * @head: pointer to the head of a list
  * @str: data to be added
  *
- * Return: a pointer to the list
+ * Return: a pointer to the list or NULL
  */
 list_t *add_node(list_t **head, const char *str)
 {
 	list_t *node;
 
 	node = malloc(sizeof(list_t));
+	if (node == NULL)
+		return (NULL);
+
 	node->len = strlen(str);
 	node->str = malloc(sizeof(char) * node->len);
 	strcpy(node->str, str);
