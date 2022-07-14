@@ -11,28 +11,16 @@
 size_t print_list(const list_t *h)
 {
 	size_t count = 0;
-	list_t *head;
+	const list_t *temp = h;
 
-	if (h != NULL)
+	while (temp != NULL)
 	{
-		head = malloc(sizeof(list_t));
-		if (head == NULL)
-			return (-1);
-
-		head->len = h->len;
-		head->str = h->str;
-		head->next = h->next;
-
-		while (head != NULL)
-		{
-			if (head->str == NULL)
-				printf("[0] (nil)\n");
-			else
-				printf("[%d] %s\n", head->len, head->str);
-			head = head->next;
-			count++;
-		}
-		free(head);
+		if (temp->str == NULL)
+			printf("[0] (nil)\n");
+		else
+			printf("[%d] %s\n", temp->len, temp->str);
+		temp = temp->next;
+		count++;
 	}
 	return (count);
 }
