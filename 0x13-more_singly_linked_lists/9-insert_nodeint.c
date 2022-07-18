@@ -59,11 +59,11 @@ listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 
 /**
  * insert_nodeint_at_index - inserts a give node at the specified index
- * @head: pointer to the head of the list 
+ * @head: pointer to the head of the list
  * @idx: index to insert the node
  * @n: value of the node to be inserted
- * 
- * Return: address of the new node 
+ *
+ * Return: address of the new node
  */
 listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 {
@@ -72,7 +72,7 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 
 	if (head == NULL)
 		return (NULL);
-	
+
 	if (idx == 0)
 		temp = add_nodeint(head, n);
 	else
@@ -80,15 +80,15 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 		node = get_nodeint_at_index(*head, idx - 1);
 		if (node == NULL)
 			return (NULL);
-		
+
 		temp = malloc(sizeof(listint_t));
 		if (temp == NULL)
 			return (NULL);
 		temp->n = n;
-		
+
 		temp->next = node->next;
 		node->next = temp;
 	}
-	
+
 	return (temp);
 }
