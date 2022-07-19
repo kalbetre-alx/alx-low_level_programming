@@ -22,7 +22,7 @@ list_addr *add_nodeaddr(list_addr **head, const size_t addr)
 
 	node = malloc(sizeof(list_addr));
 	if (node == NULL)
-		return (NULL);
+		exit(98);
 
 	node->addr = addr;
 
@@ -65,9 +65,6 @@ size_t print_listint_safe(const listint_t *head)
 	size_t count = 0;
 	const listint_t *temp = head;
 	list_addr *printed = NULL;
-
-	if (temp == NULL)
-		exit(98);
 
 	while (temp != NULL)
 	{
