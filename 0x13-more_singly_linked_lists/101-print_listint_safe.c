@@ -71,14 +71,13 @@ size_t print_listint_safe(const listint_t *head)
 
 	while (temp != NULL)
 	{
-		printf("[%p] %d\n", (void *)temp, temp->n);
-		temp = temp->next;
 		if (add_nodeaddr(&printed, (size_t)temp) == NULL)
 		{
 			printf("-> [%p] %d\n", (void *)temp, temp->n);
-			free_listaddr(printed);
-			exit(98);
+			break;
 		}
+		printf("[%p] %d\n", (void *)temp, temp->n);
+		temp = temp->next;
 		count++;
 	}
 	free_listaddr(printed);
