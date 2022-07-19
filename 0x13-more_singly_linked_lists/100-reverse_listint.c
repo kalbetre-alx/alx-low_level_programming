@@ -1,34 +1,6 @@
 #include "lists.h"
 
 /**
- * add_nodeint_front - adds an element to a list
- * @head: pointer to the head of a list
- * @n: data to be added
- *
- * Return: a pointer to the list or NULL
- */
-listint_t *add_nodeint_front(listint_t **head, const int n)
-{
-	listint_t *node;
-
-	node = malloc(sizeof(listint_t));
-	if (node == NULL)
-		return (NULL);
-
-	node->n = n;
-
-	if (head == NULL)
-	{
-		node->next = NULL;
-		return (node);
-	}
-
-	node->next = *head;
-	*head = node;
-	return (node);
-}
-
-/**
  * reverse_listint - reverses the elements of a list
  * @head: pointer to the head of the list
  *
@@ -36,15 +8,20 @@ listint_t *add_nodeint_front(listint_t **head, const int n)
  */
 listint_t *reverse_listint(listint_t **head)
 {
-	listint_t *rev_list = NULL, *temp = *head;
+	listint_t *temp_1, *temp_2;
 
-	while (temp != NULL)
+	temp_1 = *head;
+	if (temp_1 == NULL)
+		return (*head);
+
+	temp_2 = temp_1->next;
+
+	while (temp_2 != NULL)
 	{
-		add_nodeint_front(&rev_list, temp->n);
-		temp = temp->next;
+		temp_1->next = temp_2->next;
+		temp_2->next = *head;
+		*head = temp_2;
+		temp_2 = temp_1->next;
 	}
-
-	free_listint2(head);
-	*head = rev_list;
 	return (*head);
 }
