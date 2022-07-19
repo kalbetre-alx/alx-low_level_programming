@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * add_nodeint - adds an element to a list
+ * add_nodeint_front - adds an element to a list
  * @head: pointer to the head of a list
  * @n: data to be added
  *
@@ -43,8 +43,8 @@ listint_t *reverse_listint(listint_t **head)
 		add_nodeint_front(&rev_list, temp->n);
 		temp = temp->next;
 	}
-	
-	free_listint2(head);	
+
+	free_listint2(head);
 	*head = rev_list;
 	return (*head);
 }
