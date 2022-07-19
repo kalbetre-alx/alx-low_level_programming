@@ -1,5 +1,6 @@
 #include "lists.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
  * add_nodeaddr - adds an element to a list
@@ -67,7 +68,7 @@ size_t print_listint_safe(const listint_t *head)
 
 	if (temp == NULL)
 		exit(98);
-		
+
 	while (temp != NULL)
 	{
 		printf("[%p] %d\n", (void *)temp, temp->n);
