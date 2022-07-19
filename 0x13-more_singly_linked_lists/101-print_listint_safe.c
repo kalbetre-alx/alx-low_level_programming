@@ -1,5 +1,4 @@
 #include "lists.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 /**
@@ -19,7 +18,7 @@ list_addr *add_nodeaddr(list_addr **head, const size_t addr)
 			return (NULL);
 		temp = temp->next;
 	}
-	
+
 	node = malloc(sizeof(list_addr));
 	if (node == NULL)
 		return (NULL);
@@ -66,6 +65,9 @@ size_t print_listint_safe(const listint_t *head)
 	const listint_t *temp = head;
 	list_addr *printed = NULL;
 
+	if (temp == NULL)
+		exit(98);
+		
 	while (temp != NULL)
 	{
 		printf("[%p] %d\n", (void *)temp, temp->n);
