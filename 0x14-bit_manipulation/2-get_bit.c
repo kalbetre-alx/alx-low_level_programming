@@ -1,7 +1,4 @@
 #include "main.h"
-#include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
 
 /**
  * get_bit - gets the value of a bit at a given index
