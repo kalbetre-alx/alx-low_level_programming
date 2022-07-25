@@ -268,8 +268,31 @@ void print_type(ElfW(Ehdr) header)
  */
 void print_entry(ElfW(Ehdr) header)
 {
+	int i = 0, len = 0;
+	unsigned char *p = (unsigned char *)&header.e_entry;
+
 	printf("  Entry point address:               0x");
-	printf("%lx\n", header.e_entry);
+	if (header.e_ident[EI_DATA] != ELFDATA2MSB)
+	{
+		i = header.e_ident[EI_CLASS] == ELFCLASS64 ? 7 : 3;
+		while (!p[i])
+			i--;
+		printf("%x", p[i--]);
+		for (; i >= 0; i--)
+			printf("%02x", p[i]);
+		printf("\n");
+	}
+	else
+	{
+		i = 0;
+		len = header.e_ident[EI_CLASS] == ELFCLASS64 ? 7 : 3;
+		while (!p[i])
+			i++;
+		printf("%x", p[i++]);
+		for (; i <= len; i++)
+			printf("%02x", p[i]);
+		printf("\n");
+	}
 }
 
 /**
