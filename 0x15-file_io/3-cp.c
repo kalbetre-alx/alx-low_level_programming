@@ -18,6 +18,39 @@ void close_file(int file_d)
 }
 
 /**
+ * check_read - checks read operation
+ * @file_name: the file descriptor
+ * @result: the return of a call to write
+ *
+ * Return: Nothing
+ */
+void check_read(char *file_name, int result)
+{
+	if (result == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_name);
+		exit(98);
+	}
+}
+
+/**
+ * check_write - checks write operation
+ * @file_name: the file descriptor
+ * @result: the return of a call to write
+ *
+ * Return: Nothing
+ */
+void check_write(char *file_name, int result)
+{
+	if (result == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_name);
+		exit(99);
+	}
+}
+
+
+/**
  * main - check the code
  * @argc: the number of arguments passed to the program
  * @argv: the arguments
@@ -37,33 +70,18 @@ int main(int argc, char **argv)
 		exit(97);
 	}
 	fd_from = open(argv[1], O_RDONLY);
-	if (fd_from == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		exit(98);
-	}
+	check_read(argv[1], fd_from);
 	f_mode = S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR | S_IWGRP;
 	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, f_mode);
-	if (fd_to == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		exit(99);
-	}
+	check_write(argv[2], fd_to);
+
 	do {
 		r_count = read(fd_from, buff, buff_len);
-		if (r_count == -1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-			exit(98);
-		}
+		check_read(argv[1], r_count);
 		if (r_count != 0)
 		{
 			w_count = write(fd_to, buff, r_count);
-			if (w_count != r_count)
-			{
-				dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-				exit(99);
-			}
+			check_write(argv[2], w_count != r_count ? -1 : 1);
 		}
 	} while (r_count > 0);
 
