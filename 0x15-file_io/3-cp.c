@@ -27,7 +27,8 @@ void close_file(int file_d)
 int main(int argc, char **argv)
 {
 	ssize_t r_count, w_count;
-	int fd_to, fd_from, mode, buff_len = 1024;
+	int fd_to, fd_from, buff_len = 1024;
+	mode_t f_mode;
 	char buff[1024];
 
 	if (argc != 3)
@@ -41,8 +42,8 @@ int main(int argc, char **argv)
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
-	mode = S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR | S_IWGRP;
-	fd_to = open(argv[2], O_RDWR | O_CREAT | O_TRUNC, mode);
+	f_mode = S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR | S_IWGRP;
+	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, f_mode);
 	if (fd_to == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
@@ -50,6 +51,11 @@ int main(int argc, char **argv)
 	}
 	do {
 		r_count = read(fd_from, buff, buff_len);
+		if (r_count == -1)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+			exit(98);
+		}
 		if (r_count != 0)
 		{
 			w_count = write(fd_to, buff, r_count);
